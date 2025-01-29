@@ -7,6 +7,17 @@ const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
+  allConfig: {
+    overrides: [
+      {
+        files: ["__tests__/**/*"],
+        plugins: ["jest"],
+        env: {
+          "jest/globals": true,
+        },
+      },
+    ],
+  },
 });
 
 const eslintConfig = [

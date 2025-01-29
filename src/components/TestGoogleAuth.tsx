@@ -1,5 +1,4 @@
 "use client";
-import { googleAuthorize } from "@/utils/googleAuthorize";
 import React from "react";
 
 /** For uploading json files. */
@@ -21,9 +20,6 @@ export default function TestGoogleAuth() {
           if (!mimeTypesAllowlist.includes(file.type)) {
             return console.log(`File has invalid type: ${file.type}`);
           }
-
-          // This is a JSON file.
-          await googleAuthorize();
         }}
       />
     </div>

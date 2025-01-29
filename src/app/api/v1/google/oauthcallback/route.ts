@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
   const redirectUrl = process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URL ?? "";
-  const oauth2Client = googleOAuth2(redirectUrl);
+  const oAuth2Client = googleOAuth2(redirectUrl);
 
   const { success, ...rest } = googleOAuth2CallbackSchema.safeParse(
     Object.fromEntries(url.searchParams.entries())
@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const { tokens } = await oauth2Client.getToken(rest.data!.code);
+    const { tokens } = await oAuth2Client.getToken(rest.data!.code);
     const expirationDate = tokens.expiry_date;
     if (typeof expirationDate !== "number") {
       throw new Error("Expiration date is invalid.");
@@ -39,8 +39,8 @@ export async function GET(req: NextRequest) {
       }
     );
   } catch (err) {
-    console.log(oauth2Client);
+    console.log(oAuth2Client);
     console.log((err as Error).message);
   }
-  return NextResponse.redirect("http://localhost:3000/");
+  return NextResponse.redirect(process.env.NEXT_PUBLIC_BASE_URL ?? "");
 }

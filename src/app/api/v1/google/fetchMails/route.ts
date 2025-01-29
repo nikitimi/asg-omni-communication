@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const redirectUrl = process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URL ?? "";
-  const oauth2Client = googleOAuth2(redirectUrl);
+  const oAuth2Client = googleOAuth2(redirectUrl);
   const cookieList = await cookies();
 
   try {
@@ -14,11 +14,11 @@ export async function GET() {
       throw new Error("Invalid credential cookie.");
     }
     const credentials = JSON.parse(cookieCred.value);
-    oauth2Client.setCredentials(credentials);
+    oAuth2Client.setCredentials(credentials);
 
     const gmail = google.gmail({
       version: "v1",
-      auth: oauth2Client,
+      auth: oAuth2Client,
     });
 
     const res = await gmail.users.messages.list({

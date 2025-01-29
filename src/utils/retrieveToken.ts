@@ -1,3 +1,4 @@
+"server only";
 import type { google } from "googleapis";
 import type { authenticate } from "@google-cloud/local-auth";
 import type { GoogleCredentials } from "./schemas/googleCredentials";

@@ -1,3 +1,4 @@
+"server only";
 import { google } from "googleapis";
 import { SCOPES } from "./constants";
 

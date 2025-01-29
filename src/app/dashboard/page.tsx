@@ -1,10 +1,12 @@
+import type { SMSHistory } from "@/utils/schemas/smsHistory";
+
 import React from "react";
 
-import createAuthorization from "@/utils/createAuthorization";
-import SMSHistory from "@/components/SMSHistory";
+import MessagesHistory from "@/components/MessagesHistory";
 import Navigation from "@/components/Navigation";
 import SendSMS from "@/components/SendSMS";
-import type { SMSHistory as SH } from "@/utils/schemas/smsHistory";
+import SendMMS from "@/components/SendMMS";
+import createAuthorization from "@/utils/createAuthorization";
 
 export default async function Dashboard() {
   const smsHistoryEndpoint = new URL(
@@ -30,7 +32,7 @@ export default async function Dashboard() {
     }),
   ];
   const responses = await Promise.allSettled(requests);
-  const responseValues: SH[] = [];
+  const responseValues: SMSHistory[] = [];
 
   for (const response of responses.filter(
     (response) => response.status === "fulfilled"
@@ -49,8 +51,9 @@ export default async function Dashboard() {
     <div>
       <Navigation />
       <p>Dashboard</p>
-      <SendSMS />
-      <SMSHistory responses={responseValues} />
+      <SendSMS auth={createAuthorization()} />
+      <SendMMS auth={createAuthorization()} />
+      <MessagesHistory responses={responseValues} />
     </div>
   );
 }

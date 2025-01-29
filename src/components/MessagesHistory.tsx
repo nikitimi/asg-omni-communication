@@ -1,10 +1,10 @@
 "use client";
-import type { SMSHistory as SH } from "@/utils/schemas/smsHistory";
+import type { SMSHistory } from "@/utils/schemas/smsHistory";
 
 import millisecondsToDate from "@/utils/millisecondsToDate";
 import Image from "next/image";
 
-export default function SMSHistory(props: { responses: SH[] }) {
+export default function MessagesHistory(props: { responses: SMSHistory[] }) {
   const [SMS, MMS] = props.responses;
   const stringLimit = 15;
 

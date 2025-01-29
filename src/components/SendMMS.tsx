@@ -2,36 +2,40 @@
 import React, { type FormEvent } from "react";
 
 import { CLICKSEND_BASE_HEADERS } from "@/utils/constants";
-import sendSMSSchema, { type SendSMS } from "@/utils/schemas/sendSMS";
+import sendMMSSchema, { type SendMMS } from "@/utils/schemas/sendMMS";
 import testNumbers from "@/utils/testNumbers";
 
-export default function SendSMS(props: { auth: string }) {
+export default function SendMMS(props: { auth: string }) {
   console.log(props.auth);
   async function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formdata = new FormData(e.currentTarget);
-    const { success, ...rest } = sendSMSSchema.safeParse(
+    const { success, ...rest } = sendMMSSchema.safeParse(
       Object.fromEntries(formdata.entries())
     );
 
     try {
       if (!success) throw new Error(rest.error!.message);
-      const message = rest.data! as SendSMS;
-      const SMSSendingEndpoint = new URL(
-        "./sms/send",
+      const { media_file, ...message } = rest.data! as SendMMS;
+      console.log("UPLOAD ME IN S3", media_file);
+      const mmsSendingEndpoint = new URL(
+        "./mms/send",
         process.env.NEXT_PUBLIC_CLICKSEND_URL ?? ""
       );
       const body = {
+        media_file:
+          "https://tshb7tup6e.ufs.sh/f/TcMurjzFRPKaYMFU24g32aBjwUTPzhNsDWkKAv5E1bqlLF4x",
         messages: [
           {
             ...message,
             schedule: message.schedule === "null" ? null : message.schedule,
           },
         ],
+        show_summary: true,
         exclude_no_sender_id_recipients: false,
       };
 
-      await fetch(SMSSendingEndpoint, {
+      await fetch(mmsSendingEndpoint, {
         method: "POST",
         headers: {
           ...CLICKSEND_BASE_HEADERS,
@@ -45,7 +49,7 @@ export default function SendSMS(props: { auth: string }) {
   }
   return (
     <div>
-      <p>SendSMS</p>
+      <p>SendMMS</p>
       <form
         onSubmit={handleFormSubmit}
         className="flex flex-col gap-2 border border-green-200"
@@ -57,13 +61,19 @@ export default function SendSMS(props: { auth: string }) {
           required
           className="text-black"
         />
+        <input
+          type="text"
+          name="subject"
+          placeholder="subject"
+          required
+          className="text-black"
+        />
+        <input type="hidden" name="schedule" value="null" required />
         <select name="to" required className="text-black">
           {testNumbers.map((number) => (
             <option key={number}>{number}</option>
           ))}
         </select>
-        <input type="hidden" name="schedule" value="null" required />
-        <input type="hidden" name="source" value="dashboard" required />
         <input
           type="text"
           name="body"
@@ -71,7 +81,8 @@ export default function SendSMS(props: { auth: string }) {
           required
           className="text-black"
         />
-        <button type="submit">Send SMS</button>
+        <input type="file" name="media_file" accept=".jpg" required />
+        <button type="submit">Send MMS</button>
       </form>
     </div>
   );

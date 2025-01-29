@@ -6,6 +6,7 @@ const sendSMSSchema = z.object({
   accountSid: z.string(),
   authToken: z.string(),
   body: z.string(),
+  from: z.string(),
   to: z.string(),
 });
 

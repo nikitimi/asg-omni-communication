@@ -15,6 +15,7 @@ export async function POST(req: NextRequest) {
   const { success, ...rest } = sendSMSSchema
     .pick({
       body: true,
+      from: true,
       to: true,
     })
     .safeParse(json);

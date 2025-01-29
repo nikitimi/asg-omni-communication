@@ -23,20 +23,24 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const { tokens } = await oauth2Client.getToken(rest.data!.code);
-  const expirationDate = tokens.expiry_date;
-  if (typeof expirationDate !== "number") {
-    // redirect to error?
-    return NextResponse.redirect("http://localhost:3000/");
-  }
-  const cookieList = await cookies();
-  cookieList.set(
-    ...[process.env.CREDENTIALS_COOKIE_KEY ?? "", JSON.stringify(tokens)],
-    {
-      expires: expirationDate,
-      path: "/api/v1/google/",
-      secure: process.env.NODE_ENV === "production",
+  try {
+    const { tokens } = await oauth2Client.getToken(rest.data!.code);
+    const expirationDate = tokens.expiry_date;
+    if (typeof expirationDate !== "number") {
+      throw new Error("Expiration date is invalid.");
     }
-  );
+    const cookieList = await cookies();
+    cookieList.set(
+      ...[process.env.CREDENTIALS_COOKIE_KEY ?? "", JSON.stringify(tokens)],
+      {
+        expires: expirationDate,
+        path: "/api/v1/google/",
+        secure: process.env.NODE_ENV === "production",
+      }
+    );
+  } catch (err) {
+    console.log(oauth2Client);
+    console.log((err as Error).message);
+  }
   return NextResponse.redirect("http://localhost:3000/");
 }

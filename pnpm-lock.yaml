@@ -8,9 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@mapbox/node-pre-gyp':
+        specifier: ^2.0.0
+        version: 2.0.0
       next:
         specifier: 15.1.6
         version: 15.1.6(@babel/core@7.26.7)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      node-pre-gyp:
+        specifier: ^0.17.0
+        version: 0.17.0
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -39,9 +45,6 @@ importers:
       '@jest/globals':
         specifier: ^29.7.0
         version: 29.7.0
-      '@mapbox/node-pre-gyp':
-        specifier: ^2.0.0
-        version: 2.0.0
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
@@ -69,9 +72,6 @@ importers:
       jest:
         specifier: ^29.5.0
         version: 29.5.0(@types/node@20.17.16)(ts-node@10.9.2(@types/node@20.17.16)(typescript@5.7.3))
-      node-pre-gyp:
-        specifier: ^0.17.0
-        version: 0.17.0
       postcss:
         specifier: ^8
         version: 8.5.1

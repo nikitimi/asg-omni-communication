@@ -42,3 +42,4 @@ next-env.d.ts
 
 # For the project
 src/credentials/*
+certificates

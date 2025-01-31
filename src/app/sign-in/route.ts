@@ -5,6 +5,7 @@ import { SCOPES } from "@/utils/constants";
 /** Temporary redirect. */
 export async function GET() {
   const redirectURL = process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URL ?? "";
+  console.log(redirectURL);
   const oAuth2Client = googleOAuth2(redirectURL);
 
   const url = oAuth2Client.generateAuthUrl({

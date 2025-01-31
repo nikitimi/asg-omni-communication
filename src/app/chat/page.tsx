@@ -22,7 +22,6 @@ export default async function Connect() {
       </header>
       <div aria-description="chatbox" className="border border-white">
         <Suspense>
-          {" "}
           <Chat data={response.json()} />{" "}
         </Suspense>
       </div>

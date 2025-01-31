@@ -1,4 +1,10 @@
 import { initializeApp } from "firebase/app";
+import {
+  collection,
+  getFirestore,
+  where as w,
+  type WhereFilterOp,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -10,5 +16,16 @@ const firebaseConfig = {
 };
 
 const firebase = initializeApp(firebaseConfig);
+export const firestore = getFirestore(firebase);
+export const chatCollection = collection(firestore, "chats");
+
+/** Field specifier to ensure the keys when using query. */
+export function where<T extends string>(
+  field: T,
+  as: WhereFilterOp,
+  value: string
+) {
+  return w(field, as, value);
+}
 
 export default firebase;

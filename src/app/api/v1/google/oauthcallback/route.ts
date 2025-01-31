@@ -42,5 +42,5 @@ export async function GET(req: NextRequest) {
     console.log(oAuth2Client);
     console.log((err as Error).message);
   }
-  return NextResponse.redirect(process.env.NEXT_PUBLIC_BASE_URL ?? "");
+  return NextResponse.redirect(process.env.NEXT_PUBLIC_WEB_ORIGIN ?? "");
 }

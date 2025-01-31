@@ -1,9 +1,8 @@
-import { NextResponse } from "next/server";
 import googleOAuth2 from "@/utils/googleOAuth2";
 import { SCOPES } from "@/utils/constants";
 
 /** Temporary redirect. */
-export async function GET() {
+export default function getRedirectURL() {
   const redirectURL = process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URL ?? "";
   const oAuth2Client = googleOAuth2(redirectURL);
 
@@ -12,6 +11,5 @@ export async function GET() {
     scope: SCOPES.split(" "),
   });
 
-  console.log(oAuth2Client);
-  return NextResponse.redirect(url);
+  return url;
 }

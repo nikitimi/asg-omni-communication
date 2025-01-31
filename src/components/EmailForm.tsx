@@ -63,7 +63,7 @@ export default function EmailForm() {
 
     const url = new URL(
       "./api/v1/google/compose/",
-      process.env.NEXT_PUBLIC_BASE_URL
+      process.env.NEXT_PUBLIC_WEB_ORIGIN
     );
     try {
       const response = await fetch(url, {

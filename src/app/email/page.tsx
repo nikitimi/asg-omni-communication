@@ -4,7 +4,7 @@ import EmailForm from "@/components/EmailForm";
 export default function Connect() {
   return (
     <div>
-      <p>Connect</p>
+      <p>Email</p>
       <EmailForm />
     </div>
   );

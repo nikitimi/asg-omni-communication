@@ -1,3 +1,4 @@
+import getRedirectURL from "@/utils/getRedirectURL";
 import googleOAuth2 from "@/utils/googleOAuth2";
 import mailComposeSchema, {
   type MailCompose,
@@ -106,10 +107,17 @@ export async function POST(req: NextRequest) {
       message: res.data.id,
     });
   } catch (err) {
+    const forRedirection = "Invalid credential cookie.";
+    const error = err as Error;
+
+    if (error.message === forRedirection) {
+      return NextResponse.redirect(getRedirectURL());
+    }
+
     return NextResponse.json(
       {
         success: false,
-        message: (err as Error).message,
+        message: error.message,
       },
       { status: 400 }
     );

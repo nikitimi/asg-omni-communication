@@ -58,7 +58,7 @@ export default function Chat<T>(props: { data: Promise<T> }) {
     const chat = {
       to: state.to,
       from: users.find((user) => user.id === userResource.user?.id)
-        ?.emailAddresses[0].email_address,
+        ?.email_addresses[0].email_address,
       dateCreated: date.getTime(),
       message,
       attachments: JSON.stringify(json.message),

@@ -2,6 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import { TITLE } from "@/utils/constants";
 import Navigation from "@/components/Navigation";
+import { SignInButton } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: `${TITLE} - SignIn`,
@@ -9,9 +10,12 @@ export const metadata: Metadata = {
 
 export default function SignIn() {
   return (
+    (
     <div>
       <Navigation />
-      <p>SignIn</p>
+      <h2>SignIn</h2>
+      <SignInButton />
     </div>
+  )
   );
 }

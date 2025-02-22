@@ -49,3 +49,7 @@ then install the other devDependencies(or theoretically avoid the type check for
 ```bash
   pnpm add -D @types/bluebird @types/request
 ```
+
+#### Realtime-chat
+- Delay in effect of showing the chats with `useRealtimeMessage` custom hook.
+- Currently need to have 3 accounts to interact with to show the messages for the actual target recipient.

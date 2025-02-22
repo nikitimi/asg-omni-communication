@@ -15,8 +15,9 @@ The voice call is not working as it should be but it is working under these cond
 - These should establish the voice call in websocket.
 
 #### SMS/MMS
-  - Reading (Almost done.)
-  - Sending (WIP)
+
+- Reading (Almost done.)
+- Sending (WIP)
 
 clicksend npm package requires manual set-up
 
@@ -51,5 +52,6 @@ then install the other devDependencies(or theoretically avoid the type check for
 ```
 
 #### Realtime-chat
+
 - Delay in effect of showing the chats with `useRealtimeMessage` custom hook.
 - Currently need to have 3 accounts to interact with to show the messages for the actual target recipient.

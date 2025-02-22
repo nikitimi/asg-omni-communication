@@ -1,16 +1,17 @@
 import Link from "next/link";
 
 export default function Navigation() {
-  const routes = ["connect", "sign-in", "sign-up", "dashboard"];
+  const routes = [
+    { value: "email", name: "email" },
+    { value: "voice", name: "voice" },
+    { value: "sign-in", name: "chat" },
+    { value: "dashboard", name: "SMS/MMS" },
+  ];
   return (
     <nav className="flex gap-2 bg-blue-800 p-4 justify-around items-center">
-      {routes.map((route) => (
-        <Link
-          key={route}
-          href={`/${route}`}
-          className="capitalize border border-green-200"
-        >
-          {route.replace("-", " ")}
+      {routes.map(({ value, name }) => (
+        <Link key={value} href={`/${value}`} className="capitalize">
+          {name.replace("-", " ")}
         </Link>
       ))}
     </nav>

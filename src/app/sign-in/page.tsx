@@ -10,12 +10,14 @@ export const metadata: Metadata = {
 
 export default function SignIn() {
   return (
-    (
     <div>
       <Navigation />
-      <h2>SignIn</h2>
-      <SignInButton />
+      <section className="flex h-screen items-center justify-center flex-col">
+        <h2>⬇ Sign in for Chat ⬇</h2>
+        <div className="hover:bg-green-500 bg-green-400 ease-in-out duration-300 w-32 rounded-lg shadow-sm px-2 py-1 text-center">
+          <SignInButton />
+        </div>
+      </section>
     </div>
-  )
   );
 }

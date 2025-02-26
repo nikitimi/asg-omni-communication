@@ -1,3 +1,5 @@
+**Currently running only in local system because the post install from clicksend needs manual configuration to avoid errors, these can be bypassed with manually setting up Docker and putting the URL here in GitHub.**
+
 Reference for creating credentials in Google Developer specifically for Gmail right [here](https://developers.google.com/gmail/api/quickstart/nodejs).
 
 #### Email (Gmail)
